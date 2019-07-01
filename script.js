@@ -91,8 +91,6 @@
         isRadio = document.querySelector('#' + answerNode.htmlFor).type === 'radio'
       }
 
-      console.log(answerNode, isRadio)
-
       if (answerNode.nodeName !== 'LABEL' && !isRadio) {
         exeptions.push(questionNode)
         fill(search, answer)
