@@ -4,11 +4,24 @@
   // ============================================================
   let answers = [
     { type: 'radio', search: 'Достовірність це', answer: 'відповідність отриманої інформації' },
+    { type: 'radio', search: 'яка мотивація джерела', answer: 'одержання переваг у зовніш' },
+    { type: 'radio', search: 'Заявка на видачу патенту включає у себе', answer: 'Заяву, опис винаходу, формулу' },
+    { type: 'radio', search: 'Коли була заснована Всесвітня', answer: '14 липня' },
+    { type: 'radio', search: 'Коли була заснована Всесвітня', answer: '14 липня' },
+    { type: 'radio', search: 'Коли була заснована Всесвітня', answer: '14 липня' },
+    { type: 'radio', search: 'Коли була заснована Всесвітня', answer: '14 липня' },
+    { type: 'radio', search: 'Які права належать до Всесвітньої організації інтелектуальної', answer: 'літературні, художні й наукові твори' },
     { type: 'checkbox', search: 'Є два види інформації', answer: ['відкрита', 'з обмеж'] },
-    { type: 'input', search: 'відомість про щось незалежно від форми', answer: 'Галя' },
+    { type: 'checkbox', search: 'Об’єктом винаходу може', answer: ['продукт (пристрій, речовина', 'спосіб', 'застосування раніше відомого продукту'] },
+    { type: 'input', search: 'відомість про щось незалежно від форми', answer: 'Інформація' },
+    { type: 'input', search: 'це набір слайдів', answer: 'Презентація' },
+    { type: 'input', search: 'процес несанкціонованого інформації', answer: 'Дешифрування' },
+    { type: 'input', search: 'процес несанкціонованого інформації', answer: 'Дешифрування' },
+    { type: 'input', search: 'право особи на результат інтелектуальної творчої діяльності або на', answer: 'Інтелектуальна власність' },
     { type: 'select', search: 'Цілісність інформації', answer: 'визначається можливістю забез' },
     { type: 'select', search: 'Достовірність', answer: 'відповідність отриманої інфо' },
-    { type: 'select', search: 'конфіденційність', answer: 'властивість інформації бути' }
+    { type: 'select', search: 'конфіденційність', answer: 'властивість інформації бути' },
+    { type: 'select', search: 'ліцензія', answer: 'не виключає можливості використання ліцензіаром' }
   ]
 
 
@@ -67,7 +80,8 @@
     let exeptions = []
 
     return (function fill() {
-      var questionNode = findParentNodeByText(search)
+      var questionNode = findParentNodeByText(search, null, exeptions)
+      if (!questionNode) return
       var answerNode = findParentNodeByText(answer, questionNode.parentNode)
 
       if (!answerNode) return
@@ -77,7 +91,9 @@
         isRadio = document.querySelector('#' + answerNode.htmlFor).type === 'radio'
       }
 
-      if (answerNode.nodeName !== 'INPUT' && !isRadio) {
+      console.log(answerNode, isRadio)
+
+      if (answerNode.nodeName !== 'LABEL' && !isRadio) {
         exeptions.push(questionNode)
         fill(search, answer)
         return
@@ -95,7 +111,8 @@
     let exeptions = []
 
     return (function fill() {
-      var questionNode = findParentNodeByText(search)
+      var questionNode = findParentNodeByText(search, null, exeptions)
+      if (!questionNode) return
       var firstAnswerNode = findParentNodeByText(answer[0], questionNode.parentNode)
 
       if (!firstAnswerNode) return
@@ -105,8 +122,7 @@
         isCheckbox = document.querySelector('#' + firstAnswerNode.htmlFor).type === 'checkbox'
       }
 
-
-      if (firstAnswerNode.nodeName !== 'INPUT' && !isCheckbox) {
+      if (firstAnswerNode.nodeName !== 'LABEL' && !isCheckbox) {
         exeptions.push(questionNode)
         fill(search, answer)
         return
@@ -128,11 +144,18 @@
     let exeptions = []
 
     return (function fill() {
-      var questionNode = findParentNodeByText(search)
+      var questionNode = findParentNodeByText(search, null, exeptions)
+      if (!questionNode) return
       var answerNode = questionNode.parentNode.querySelector('input')
 
       if (!answerNode) return
-      if (answerNode.nodeName !== 'INPUT') {
+      var isText = true
+
+      if (answerNode.htmlFor && !/^\d/.test(answerNode.htmlFor)) {
+        isText = document.querySelector('#' + answerNode.htmlFor).type === 'text'
+      }
+
+      if (answerNode.nodeName !== 'INPUT' && !isText) {
         exeptions.push(questionNode)
         fill(search, answer)
         return
@@ -151,6 +174,7 @@
 
     return (function fill() {
       var questionNode = findParentNodeByText(search, null, exeptions)
+      if (!questionNode) return
       var answerNode = findParentNodeByText(answer, questionNode.parentNode)
 
       if (!answerNode) return
