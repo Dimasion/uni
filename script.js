@@ -63,7 +63,7 @@
   // Radio
   // ============================================================
   function fillRadio (search, answer) {
-    if (!answer) answer = []
+    if (!answer) return
     let exeptions = []
 
     return (function fill() {
@@ -91,7 +91,7 @@
   // Checkboxes
   // ============================================================
   function fillCheckbox (search, answer) {
-    if (!answer) answer = []
+    if (!answer) return
     let exeptions = []
 
     return (function fill() {
@@ -124,6 +124,7 @@
   // Inputs
   // ============================================================
   function fillInput (search, answer) {
+    if (!answer) return
     let exeptions = []
 
     return (function fill() {
@@ -145,6 +146,7 @@
   // Selects
   // ============================================================
   function fillSelect (search, answer) {
+    if (!answer) return
     let exeptions = []
 
     return (function fill() {
