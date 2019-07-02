@@ -3,6 +3,8 @@
   // Answers array
   // ============================================================
   let answers = [
+    { type: 'radio', search: null, answer: 'клас' },
+    { type: 'radio', search: 'Які файлові системи забезпечують зберігання файлів шляхом їх розподілу між', answer: 'клас' },
     { type: 'radio', search: 'Що таке інформація', answer: 'усі відповіді правильні' },
     { type: 'radio', search: 'Достовірність - це', answer: 'реальності' },
     { type: 'radio', search: 'Актуальність - це', answer: 'достовірності' },
@@ -96,18 +98,34 @@
     { type: 'checkbox', search: 'Point мають розширення', answer: ['ppt', 'pptx'] },
     { type: 'checkbox', search: 'вікна Microsoft Excel', answer: ['адрес', 'формул', 'область'] },
     { type: 'input', search: 'форми їх подання', answer: 'Інформація' },
+    { type: 'select', search: 'ADV', answer: 'вимоги до оцінки завдання безпеки' },
   ]
 
-
+  var passedCount = 0
 
   // ============================================================
   // Main function
   // ============================================================
-  function testIt () {
+  function testIt (answers) {
     answers.forEach(item => {
       var answer = item.answer
       var search = item.search
 
+      // ============================================================
+      // Search/Answer fields checking
+      // ============================================================
+      if (!search || !answer) return
+
+      if (typeof search !== 'string') return
+      if (item.type === 'checkbox') {
+        if (!(item.answer instanceof Array)) return
+      } else {
+        if (typeof search !== 'string') return
+      }
+
+      // ============================================================
+      // Fill base on item type
+      // ============================================================
       switch (item.type) {
         case 'radio':
           fillRadio(search, answer)
@@ -123,6 +141,178 @@
           break;
       }
     })
+
+    console.log('Success. You passed', passedCount, 'tests.')
+  }
+
+  // ============================================================
+  // Radio
+  // ============================================================
+  function fillRadio (search, answer) {
+    let exeptions = []
+
+    return (function fill() {
+      // QuestionNode
+      var questionNode = findParentNodeByText(search, null, exeptions)
+
+      if (!questionNode) return
+      if (questionNode.nodeName === 'SCRIPT') {
+        exeptions.push(questionNode)
+        fill(search, answer)
+        return
+      }
+
+      exeptions.push(questionNode)
+
+      // AnswerNode
+      var answerNode = findParentNodeByText(answer, questionNode.parentNode, exeptions)
+
+      if (!answerNode) return
+      if (answerNode.nodeName !== 'LABEL') {
+        exeptions.push(questionNode)
+        fill(search, answer)
+        return
+      }
+
+      // Result
+      answerNode.click()
+      passedCount = passedCount + 1
+    })()
+  }
+
+  // ============================================================
+  // Checkboxes
+  // ============================================================
+  function fillCheckbox (search, answer) {
+    let exeptions = []
+
+    return (function fill() {
+      // QuestionNode
+      var questionNode = findParentNodeByText(search, null, exeptions)
+
+      if (!questionNode) return
+      if (questionNode.nodeName === 'SCRIPT') {
+        exeptions.push(questionNode)
+        fill(search, answer)
+        return
+      }
+
+      exeptions.push(questionNode)
+
+      // AnswerNode
+      var firstAnswerNode = findParentNodeByText(answer[0], questionNode.parentNode, exeptions)
+      if (!firstAnswerNode) return
+      if (firstAnswerNode.nodeName !== 'LABEL') {
+        exeptions.push(questionNode)
+        fill(search, answer)
+        return
+      }
+
+      // Result
+      answer.forEach(item => {
+        var answerNode = findParentNodeByText(item, questionNode.parentNode, exeptions)
+
+        if (!answerNode) return
+        answerNode.click()
+      })
+
+      passedCount = passedCount + 1
+    })()
+  }
+
+  // ============================================================
+  // Inputs
+  // ============================================================
+  function fillInput (search, answer) {
+    let exeptions = []
+
+    return (function fill() {
+      // QuestionNode
+      var questionNode = findParentNodeByText(search, null, exeptions)
+
+      if (!questionNode) return
+      if (questionNode.nodeName === 'SCRIPT') {
+        exeptions.push(questionNode)
+        fill(search, answer)
+        return
+      }
+
+      exeptions.push(questionNode)
+
+      // AnswerNode
+      var answerNode = questionNode.parentNode.querySelector('input[type="text"]')
+      if (!answerNode) return
+
+      // Result
+      answerNode.value = answer
+      passedCount = passedCount + 1
+    })()
+  }
+
+  // ============================================================
+  // Selects
+  // ============================================================
+  function fillSelect (search, answer) {
+    let exeptions = []
+
+    return (function fill() {
+      // QuestionNode
+      var questionNode = findParentNodeByText(search, null, exeptions)
+
+      if (!questionNode) return
+      if (questionNode.nodeName === 'SCRIPT') {
+        exeptions.push(questionNode)
+        fill(search, answer)
+        return
+      }
+
+      exeptions.push(questionNode)
+
+      // AnswerNode
+      var answerNode = findParentNodeByText(answer, questionNode.parentNode, exeptions)
+
+      if (!answerNode) return
+      if (answerNode.nodeName !== 'OPTION') {
+        exeptions.push(questionNode)
+        fill(search, answer)
+        return
+      }
+
+      // Result
+      answerNode.setAttribute('selected', true)
+      passedCount = passedCount + 1
+    })()
+  }
+
+  // ============================================================
+  // Get text node
+  // ============================================================
+  function getTextNodesIn(elem, opt_fnFilter) {
+    var textNodes = [];
+
+    if (elem) {
+      for (var nodes = elem.childNodes, i = nodes.length; i--;) {
+        var node = nodes[i], nodeType = node.nodeType;
+
+        if (nodeType == 3) {
+          if (!opt_fnFilter || opt_fnFilter(node, elem)) {
+            textNodes.push(node);
+          }
+        }
+        else if (nodeType == 1 || nodeType == 9 || nodeType == 11) {
+          textNodes = textNodes.concat(getTextNodesIn(node, opt_fnFilter));
+        }
+      }
+    }
+
+    return textNodes;
+  }
+
+  // ============================================================
+  // Format text
+  // ============================================================
+  function formatText (text) {
+    return text.replace(/\n|\r|\s/g, '').toLowerCase()
   }
 
   // ============================================================
@@ -137,9 +327,11 @@
     getTextNodesIn(node, function(textNode, parent) {
       if (exeptNodes.includes(parent)) return
 
-      var text = textNode.textContent
+      var text = formatText(textNode.textContent)
+      var searchText = formatText(search)
+
       if (!text) return
-      if (text.toLowerCase().includes(search.toLowerCase())) {
+      if (text.includes(searchText)) {
         parentNode = parent
       }
     });
@@ -148,157 +340,7 @@
   }
 
   // ============================================================
-  // Radio
+  // Initialization
   // ============================================================
-  function fillRadio (search, answer) {
-    if (!answer) return
-    let exeptions = []
-
-    return (function fill() {
-      var questionNode = findParentNodeByText(search, null, exeptions)
-
-      if (!questionNode) return
-      if (questionNode.nodeName === 'SCRIPT') {
-        exeptions.push(questionNode)
-        fill(search, answer)
-        return
-      }
-
-      exeptions.push(questionNode)
-
-      var answerNode = findParentNodeByText(answer, questionNode.parentNode, exeptions)
-      console.log(answerNode)
-      if (!answerNode) return
-      if (answerNode.nodeName !== 'LABEL') {
-        exeptions.push(questionNode)
-        fill(search, answer)
-        return
-      }
-
-      answerNode && answerNode.click()
-    })()
-  }
-
-  // ============================================================
-  // Checkboxes
-  // ============================================================
-  function fillCheckbox (search, answer) {
-    if (!answer) return
-    let exeptions = []
-
-    return (function fill() {
-      var questionNode = findParentNodeByText(search, null, exeptions)
-
-      if (!questionNode) return
-      if (questionNode.nodeName === 'SCRIPT') {
-        exeptions.push(questionNode)
-        fill(search, answer)
-        return
-      }
-
-      exeptions.push(questionNode)
-
-      var firstAnswerNode = findParentNodeByText(answer[0], questionNode.parentNode, exeptions)
-
-      if (!firstAnswerNode) return
-
-      if (firstAnswerNode.nodeName !== 'LABEL') {
-        exeptions.push(questionNode)
-        fill(search, answer)
-        return
-      }
-
-      answer.forEach(item => {
-        var answerNode = findParentNodeByText(item, questionNode.parentNode, exeptions)
-
-        answerNode && answerNode.click()
-      })
-    })()
-  }
-
-  // ============================================================
-  // Inputs
-  // ============================================================
-  function fillInput (search, answer) {
-    if (!answer) return
-    let exeptions = []
-
-    return (function fill() {
-      var questionNode = findParentNodeByText(search, null, exeptions)
-
-      if (!questionNode) return
-      if (questionNode.nodeName === 'SCRIPT') {
-        exeptions.push(questionNode)
-        fill(search, answer)
-        return
-      }
-
-      var answerNode = questionNode.parentNode.querySelector('input[type="text"]')
-
-      if (!answerNode) return
-      if (answerNode.nodeName !== 'INPUT') {
-        exeptions.push(questionNode)
-        fill(search, answer)
-        return
-      }
-
-      answerNode.value = answer
-    })()
-  }
-
-  // ============================================================
-  // Selects
-  // ============================================================
-  function fillSelect (search, answer) {
-    if (!answer) return
-    let exeptions = []
-
-    return (function fill() {
-      var questionNode = findParentNodeByText(search, null, exeptions)
-
-      if (!questionNode) return
-      if (questionNode.nodeName === 'SCRIPT') {
-        exeptions.push(questionNode)
-        fill(search, answer)
-        return
-      }
-
-      exeptions.push(questionNode)
-
-      var answerNode = findParentNodeByText(answer, questionNode.parentNode, exeptions)
-
-      if (!answerNode) return
-      if (answerNode.nodeName !== 'OPTION') {
-        exeptions.push(questionNode)
-        fill(search, answer)
-        return
-      }
-
-      answerNode.setAttribute('selected', true)
-    })()
-  }
-
-  function getTextNodesIn(elem, opt_fnFilter) {
-    var textNodes = [];
-    if (elem) {
-      for (var nodes = elem.childNodes, i = nodes.length; i--;) {
-        var node = nodes[i], nodeType = node.nodeType;
-        if (nodeType == 3) {
-          if (!opt_fnFilter || opt_fnFilter(node, elem)) {
-            textNodes.push(node);
-          }
-        }
-        else if (nodeType == 1 || nodeType == 9 || nodeType == 11) {
-          textNodes = textNodes.concat(getTextNodesIn(node, opt_fnFilter));
-        }
-      }
-    }
-    return textNodes;
-  }
-
-  // ============================================================
-  // Run
-  // ============================================================
-  testIt()
-  return 'Yeap!'
+  testIt(answers)
 })()
