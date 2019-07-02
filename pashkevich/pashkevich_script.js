@@ -238,9 +238,7 @@
       // AnswerNode
       var answerNode = findParentNodeByText(answer, questionNode.parentNode, exeptions)
 
-      if (!answerNode) return
-      if (answerNode.nodeName !== 'LABEL') {
-        exeptions.push(questionNode)
+      if (!answerNode || answerNode.nodeName !== 'LABEL') {
         fill(search, answer)
         return
       }
@@ -272,9 +270,8 @@
 
       // AnswerNode
       var firstAnswerNode = findParentNodeByText(answer[0], questionNode.parentNode, exeptions)
-      if (!firstAnswerNode) return
-      if (firstAnswerNode.nodeName !== 'LABEL') {
-        exeptions.push(questionNode)
+
+      if (!firstAnswerNode || firstAnswerNode.nodeName !== 'LABEL') {
         fill(search, answer)
         return
       }
@@ -312,7 +309,11 @@
 
       // AnswerNode
       var answerNode = questionNode.parentNode.querySelector('input[type="text"]')
-      if (!answerNode) return
+
+      if (!answerNode) {
+        fill(search, answer)
+        return
+      }
 
       // Result
       answerNode.value = answer
@@ -343,7 +344,6 @@
       var answerNode = findParentNodeByText(answer, questionNode.parentNode, exeptions)
 
       if (!answerNode || answerNode.nodeName !== 'OPTION') {
-        exeptions.push(questionNode)
         fill(search, answer)
         return
       }
