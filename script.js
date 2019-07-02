@@ -3,39 +3,83 @@
   // Answers array
   // ============================================================
   let answers = [
-    { type: 'radio', search: 'людина та співпраця важливіші', answer: 'процеси і інструменти' },
-
-    { type: 'radio', search: 'Достовірність це', answer: 'відповідність отриманої інформації' },
-    { type: 'radio', search: 'яка мотивація джерела', answer: 'одержання переваг у зовніш' },
-    { type: 'radio', search: 'Заявка на видачу патенту включає у себе', answer: 'Заяву, опис винаходу, формулу' },
-    { type: 'radio', search: 'Коли була заснована Всесвітня', answer: '14 липня' },
-    { type: 'radio', search: 'Коли була заснована Всесвітня', answer: '14 липня' },
-    { type: 'radio', search: 'Коли була заснована Всесвітня', answer: '14 липня' },
-    { type: 'radio', search: 'Коли була заснована Всесвітня', answer: '14 липня' },
-    { type: 'radio', search: 'Які права належать до Всесвітньої організації інтелектуальної', answer: 'літературні, художні й наукові твори' },
-    { type: 'checkbox', search: 'Є два види інформації', answer: ['відкрита', 'з обмеж'] },
-    { type: 'checkbox', search: 'Об’єктом винаходу може', answer: ['продукт (пристрій, речовина', 'спосіб', 'застосування раніше відомого продукту'] },
-    { type: 'checkbox', search: 'Вказати правильні джерела загроз', answer: ['самодостатність', 'відступ'] },
-    { type: 'input', search: 'відомість про щось незалежно від форми', answer: 'Інформація' },
-    { type: 'input', search: 'це набір слайдів', answer: 'Презентація' },
-    { type: 'input', search: 'процес несанкціонованого інформації', answer: 'Дешифрування' },
-    { type: 'input', search: 'процес несанкціонованого інформації', answer: 'Дешифрування' },
-    { type: 'input', search: 'право особи на результат інтелектуальної творчої діяльності або на', answer: 'Інтелектуальна власність' },
-    { type: 'select', search: 'Цілісність інформації', answer: 'визначається можливістю забез' },
-    { type: 'select', search: 'Достовірність', answer: 'відповідність отриманої інфо' },
-    { type: 'select', search: 'конфіденційність', answer: 'властивість інформації бути' },
-    { type: 'select', search: 'ліцензія', answer: 'не виключає можливості використання ліцензіаром' },
-    { type: 'select', search: 'ACM', answer: 'Вимоги до керування конфігурацією' },
-    { type: 'select', search: 'AGD', answer: 'Вимоги до посібника користувача та адміністратора' },
-    { type: 'select', search: 'ATE', answer: 'Вимоги до тестування' },
-    { type: 'select', search: 'AVA', answer: 'Вимоги до оцінки вразливостей' },
-    { type: 'select', search: 'ADO', answer: 'Вимоги до постачання та експлуатації' },
-    { type: 'select', search: 'AMA', answer: 'Вимоги до підтримки довіри після серти' },
-    { type: 'select', search: 'FAU', answer: 'Вимоги до сервісу аудиту' },
-    { type: 'select', search: 'FIA', answer: 'Вимоги до ідентифікації та автентифікації' },
-    { type: 'select', search: 'ARU', answer: 'Вимоги до використання ресурсів' },
-    { type: 'select', search: 'ASE', answer: 'Вимоги до оцінки завдання безпеки' },
-    { type: 'radio', search: 'Виберіть носій, на якому застосовується файлова система', answer: 'ядро' }
+    { type: 'radio', search: 'Що таке інформація', answer: 'усі відповіді правильні' },
+    { type: 'radio', search: 'Достовірність - це', answer: 'реальності' },
+    { type: 'radio', search: 'Актуальність - це', answer: 'достовірності' },
+    { type: 'radio', search: 'Конфіденційність - це', answer: 'ознайомлення' },
+    { type: 'radio', search: 'Цілісність - це', answer: 'знищення' },
+    { type: 'radio', search: 'Доступність - це', answer: 'блокування' },
+    { type: 'radio', search: 'Спостережність - це', answer: 'захисту' },
+    { type: 'radio', search: 'Інформаційно-телекомунікаційна система', answer: 'організаційно-технічна' },
+    { type: 'radio', search: 'Що таке стенографія?', answer: 'спосіб шифрування' },
+    { type: 'radio', search: 'Комп\'ютерна система - це', answer: 'оцінювання' },
+    { type: 'radio', search: 'Обчислювальна система - цe', answer: 'обробки' },
+    { type: 'radio', search: 'Автоматизована система - цe', answer: 'інформаційну' },
+    { type: 'radio', search: 'Скільки існує класифікацій автоматизованих систем', answer: '3' },
+    { type: 'radio', search: 'АС-1', answer: 'одномашинний' },
+    { type: 'radio', search: 'АС-2', answer: 'локалізований' },
+    { type: 'radio', search: 'АС-3', answer: 'розподілений' },
+    { type: 'radio', search: 'інформації в Україні', answer: 'правильні' },
+    { type: 'radio', search: '"інші держави"', answer: 'зовнішньополітичній' },
+    { type: 'radio', search: '"політичні партії"', answer: 'владу' },
+    { type: 'radio', search: '"злочинні угрупування"', answer: 'шкоди' },
+    { type: 'radio', search: '"суб\'єкти підприємницької діяльності"', answer: 'конкурентній' },
+    { type: 'radio', search: '"окремі фізичні особи"', answer: 'винагород' },
+    { type: 'radio', search: '"навмисні та ненавмисні', answer: 'примушення' },
+    { type: 'radio', search: '"стихійні лиха', answer: 'мотивації' },
+    { type: 'radio', search: 'основні завдання захисту інформації', answer: 'правильні' },
+    { type: 'radio', search: 'Основні засоби протидії загрозам безпеки', answer: 'правильні' },
+    { type: 'radio', search: 'Правові засоби захисту інформації - це', answer: 'законодавчо-права' },
+    { type: 'radio', search: 'Морально-етичні засоби', answer: 'засоби протидії' },
+    { type: 'radio', search: 'Організаційні (адміністративні) засоби', answer: 'організаційного' },
+    { type: 'radio', search: 'Фізичні засоби захисту', answer: 'ґрунтуються' },
+    { type: 'radio', search: 'Технічні засоби захисту інформації', answer: 'засоби захисту' },
+    { type: 'radio', search: 'Відкрита інформація', answer: 'радіомовлення' },
+    { type: 'radio', search: 'Інформація з обмеженим доступом', answer: 'обмежено' },
+    { type: 'radio', search: 'На скільки категорій поділяється інформація з обмеженим доступом', answer: '2' },
+    { type: 'radio', search: 'Конфіденційна інформація - це', answer: 'держава' },
+    { type: 'radio', search: 'Таємна інформація - це', answer: 'державну' },
+    { type: 'checkbox', search: 'Інформація з обмеженим доступом поділяється на 2 категорії', answer: ['конфіденційна', 'таємна'] },
+    { type: 'radio', search: 'Скільки існує ступеней секретності', answer: '4' },
+    { type: 'radio', search: 'Які існують ступені секретності', answer: 'правильні' },
+    { type: 'radio', search: 'Політика безпеки організації - це', answer: 'принципів' },
+    { type: 'radio', search: 'Від яких чинників залежить політика безпеки', answer: 'правильні' },
+    { type: 'radio', search: 'Зі скількох розділів складається політика', answer: '2' },
+    { type: 'radio', search: 'У якому році була закінчена розробка міжнародного стандарту', answer: '1999' },
+    { type: 'radio', search: 'Скільки компонентів містять у собі вимоги-ІТ', answer: '3' },
+    { type: 'radio', search: 'Які компоненти містять у собі вимоги-ІТ', answer: 'правильні' },
+    { type: 'radio', search: '"Кільця захисту"', answer: '4' },
+    { type: 'radio', search: 'У "Кільцях захисту" який рівень є найбільш', answer: 'рівень-0' },
+    { type: 'radio', search: 'У "Кільцях захисту" який рівень є найменш', answer: 'рівень-3' },
+    { type: 'radio', search: '"Оранжева книга"', answer: 'стандарт' },
+    { type: 'radio', search: '"Оранжевої книги"', answer: '6' },
+    { type: 'radio', search: 'Що таке стенографія', answer: 'шифрування' },
+    { type: 'radio', search: 'Що таке криптографія', answer: 'математичні' },
+    { type: 'radio', search: 'биті пікселі', answer: 'PNG' },
+    { type: 'radio', search: 'Що таке шифрування даних', answer: 'приховування' },
+    { type: 'radio', search: 'Що таке розшифрування даних', answer: 'читання' },
+    { type: 'radio', search: 'Що таке дешифрування', answer: 'отримання' },
+    { type: 'radio', search: 'Що є недоліком симетричного шифрування', answer: 'тримати' },
+    { type: 'radio', search: 'Що є недоліком асиметричного шифрування', answer: 'довгі' },
+    { type: 'radio', search: 'Що є перевагою симетричного шифрування', answer: 'короткі' },
+    { type: 'radio', search: 'Який з приведених нижче не є видом захисту інформації', answer: 'Гуманітарний' },
+    { type: 'radio', search: 'Якого числа "Міжнародний', answer: 'листопада' },
+    { type: 'radio', search: 'Яка з властивостей не є властивісю інформації', answer: 'Недоторканість' },
+    { type: 'radio', search: 'Виберіть якої з файлових систем не існує', answer: 'Каскадна' },
+    { type: 'radio', search: 'Які файлові системи найбільш використовувані на даний час', answer: 'Ієрархічні' },
+    { type: 'radio', search: 'Які файлові системи не використовують каталоги', answer: 'Плоскі' },
+    { type: 'radio', search: 'Які файлові системи забезпечують механізми доступу', answer: 'мережеві' },
+    { type: 'radio', search: 'Чи є назви файлів в Microsoft Windows', answer: 'Ні' },
+    { type: 'radio', search: 'Які файлові системи забезпечують зберігання файлів шляхом їх розподілу між кількома', answer: 'Розподілені' },
+    { type: 'radio', search: 'Які файлові мережі дозволять розподіляти файли між кількома однотипними', answer: 'Кластерні' },
+    { type: 'radio', search: 'Що таке шифрування', answer: 'неавторизованих' },
+    { type: 'radio', search: 'Чи є різниця між дешифруванням та розшифруванням', answer: 'Так' },
+    { type: 'radio', search: 'Які існують методи шифрування', answer: 'Симетричні' },
+    { type: 'radio', search: 'В чому полягає суть LSB методу', answer: 'останніх значущих' },
+    { type: 'radio', search: 'Що не є об’єктом захисту IC', answer: 'Персонал' },
+    { type: 'checkbox', search: 'Є два види інформації', answer: ['відкрита', 'обмеженим'] },
+    { type: 'checkbox', search: 'Який з нижче перелічених не є методом шифрування', answer: ['Паралельний', 'послідовний'] },
+    { type: 'checkbox', search: 'З яких розділів складається політика безпеки', answer: ['Загальні', 'захисту'] },
   ]
 
 
@@ -103,8 +147,10 @@
         return
       }
 
-      var answerNode = findParentNodeByText(answer, questionNode.parentNode)
+      exeptions.push(questionNode)
 
+      var answerNode = findParentNodeByText(answer, questionNode.parentNode, exeptions)
+      console.log(answerNode)
       if (!answerNode) return
       if (answerNode.nodeName !== 'LABEL') {
         exeptions.push(questionNode)
@@ -133,7 +179,9 @@
         return
       }
 
-      var firstAnswerNode = findParentNodeByText(answer[0], questionNode.parentNode)
+      exeptions.push(questionNode)
+
+      var firstAnswerNode = findParentNodeByText(answer[0], questionNode.parentNode, exeptions)
 
       if (!firstAnswerNode) return
 
@@ -144,7 +192,7 @@
       }
 
       answer.forEach(item => {
-        var answerNode = findParentNodeByText(item, questionNode.parentNode)
+        var answerNode = findParentNodeByText(item, questionNode.parentNode, exeptions)
 
         answerNode && answerNode.click()
       })
@@ -198,7 +246,9 @@
         return
       }
 
-      var answerNode = findParentNodeByText(answer, questionNode.parentNode)
+      exeptions.push(questionNode)
+
+      var answerNode = findParentNodeByText(answer, questionNode.parentNode, exeptions)
 
       if (!answerNode) return
       if (answerNode.nodeName !== 'OPTION') {
