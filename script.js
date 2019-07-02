@@ -95,6 +95,7 @@
     { type: 'checkbox', search: 'джерела "Стихійні лиха', answer: ['Ефект', 'Масштаб', 'Зміщення'] },
     { type: 'checkbox', search: 'Point мають розширення', answer: ['ppt', 'pptx'] },
     { type: 'checkbox', search: 'вікна Microsoft Excel', answer: ['адрес', 'формул', 'область'] },
+    { type: 'input', search: 'форми їх подання', answer: 'Інформація' },
   ]
 
 
@@ -232,7 +233,7 @@
         return
       }
 
-      var answerNode = questionNode.parentNode.querySelector('input')
+      var answerNode = questionNode.parentNode.querySelector('input[type="text"]')
 
       if (!answerNode) return
       if (answerNode.nodeName !== 'INPUT') {
