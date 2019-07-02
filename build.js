@@ -40,10 +40,10 @@ function createTxt (subject, host) {
     fs.mkdirSync(subject)
   }
 
-  const text = `'дозволити вставлення';document.body.appendChild(document.createElement('script')).setAttribute('src', ${path.join(host, subject + '_script.js')})`
+  const text = `'дозволити вставлення';document.body.appendChild(document.createElement("script")).setAttribute('src', '${path.join(host, `${subject}_script.js`)}')`
   const name = `./${subject}/${subject}_append.txt`
 
-  fs.writeFile(name, text, (err) => {
+  fs.writeFile(name, text, 'utf-8', (err) => {
     if (err) throw err;
     console.log(`${name} has been created!`)
   });
