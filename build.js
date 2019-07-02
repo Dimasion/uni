@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 
-const HOST = 'https://avtobaza-beton.com.ua'
+const HOST = 'https://dimasion2010.000webhostapp.com'
 
 fs.readFile('./core.js', 'utf-8', function read(err, data) {
   if (err) { throw err; }
