@@ -319,8 +319,7 @@
       // AnswerNode
       var answerNode = findParentNodeByText(answer, questionNode.parentNode, exeptions)
 
-      if (!answerNode) return
-      if (answerNode.nodeName !== 'OPTION') {
+      if (!answerNode || answerNode.nodeName !== 'OPTION') {
         exeptions.push(questionNode)
         fill(search, answer)
         return
