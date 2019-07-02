@@ -13,6 +13,7 @@
     { type: 'radio', search: 'Які права належать до Всесвітньої організації інтелектуальної', answer: 'літературні, художні й наукові твори' },
     { type: 'checkbox', search: 'Є два види інформації', answer: ['відкрита', 'з обмеж'] },
     { type: 'checkbox', search: 'Об’єктом винаходу може', answer: ['продукт (пристрій, речовина', 'спосіб', 'застосування раніше відомого продукту'] },
+    { type: 'checkbox', search: 'Вказати правильні джерела загроз', answer: ['самодостатність', 'відступ'] },
     { type: 'input', search: 'відомість про щось незалежно від форми', answer: 'Інформація' },
     { type: 'input', search: 'це набір слайдів', answer: 'Презентація' },
     { type: 'input', search: 'процес несанкціонованого інформації', answer: 'Дешифрування' },
@@ -30,7 +31,9 @@
     { type: 'select', search: 'AMA', answer: 'Вимоги до підтримки довіри після серти' },
     { type: 'select', search: 'FAU', answer: 'Вимоги до сервісу аудиту' },
     { type: 'select', search: 'FIA', answer: 'Вимоги до ідентифікації та автентифікації' },
-    { type: 'select', search: 'ARU', answer: 'Вимоги до використання ресурсів' }
+    { type: 'select', search: 'ARU', answer: 'Вимоги до використання ресурсів' },
+    { type: 'select', search: 'ASE', answer: 'Вимоги до оцінки завдання безпеки' },
+    { type: 'radio', search: 'Виберіть носій, на якому застосовується файлова система', answer: 'ядро' }
   ]
 
 
@@ -90,17 +93,18 @@
 
     return (function fill() {
       var questionNode = findParentNodeByText(search, null, exeptions)
+
       if (!questionNode) return
+      if (questionNode.nodeName === 'SCRIPT') {
+        exeptions.push(questionNode)
+        fill(search, answer)
+        return
+      }
+
       var answerNode = findParentNodeByText(answer, questionNode.parentNode)
 
       if (!answerNode) return
-      var isRadio = true
-
-      if (answerNode.htmlFor && !/^\d/.test(answerNode.htmlFor)) {
-        isRadio = document.querySelector('#' + answerNode.htmlFor).type === 'radio'
-      }
-
-      if (answerNode.nodeName !== 'LABEL' && !isRadio) {
+      if (answerNode.nodeName !== 'LABEL') {
         exeptions.push(questionNode)
         fill(search, answer)
         return
@@ -119,17 +123,19 @@
 
     return (function fill() {
       var questionNode = findParentNodeByText(search, null, exeptions)
+
       if (!questionNode) return
+      if (questionNode.nodeName === 'SCRIPT') {
+        exeptions.push(questionNode)
+        fill(search, answer)
+        return
+      }
+
       var firstAnswerNode = findParentNodeByText(answer[0], questionNode.parentNode)
 
       if (!firstAnswerNode) return
-      var isCheckbox = true
 
-      if (firstAnswerNode.htmlFor && !/^\d/.test(firstAnswerNode.htmlFor)) {
-        isCheckbox = document.querySelector('#' + firstAnswerNode.htmlFor).type === 'checkbox'
-      }
-
-      if (firstAnswerNode.nodeName !== 'LABEL' && !isCheckbox) {
+      if (firstAnswerNode.nodeName !== 'LABEL') {
         exeptions.push(questionNode)
         fill(search, answer)
         return
@@ -152,17 +158,18 @@
 
     return (function fill() {
       var questionNode = findParentNodeByText(search, null, exeptions)
+
       if (!questionNode) return
+      if (questionNode.nodeName === 'SCRIPT') {
+        exeptions.push(questionNode)
+        fill(search, answer)
+        return
+      }
+
       var answerNode = questionNode.parentNode.querySelector('input')
 
       if (!answerNode) return
-      var isText = true
-
-      if (answerNode.htmlFor && !/^\d/.test(answerNode.htmlFor)) {
-        isText = document.querySelector('#' + answerNode.htmlFor).type === 'text'
-      }
-
-      if (answerNode.nodeName !== 'INPUT' && !isText) {
+      if (answerNode.nodeName !== 'INPUT') {
         exeptions.push(questionNode)
         fill(search, answer)
         return
@@ -181,7 +188,14 @@
 
     return (function fill() {
       var questionNode = findParentNodeByText(search, null, exeptions)
+
       if (!questionNode) return
+      if (questionNode.nodeName === 'SCRIPT') {
+        exeptions.push(questionNode)
+        fill(search, answer)
+        return
+      }
+
       var answerNode = findParentNodeByText(answer, questionNode.parentNode)
 
       if (!answerNode) return
