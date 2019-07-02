@@ -21,7 +21,16 @@
     { type: 'select', search: 'Цілісність інформації', answer: 'визначається можливістю забез' },
     { type: 'select', search: 'Достовірність', answer: 'відповідність отриманої інфо' },
     { type: 'select', search: 'конфіденційність', answer: 'властивість інформації бути' },
-    { type: 'select', search: 'ліцензія', answer: 'не виключає можливості використання ліцензіаром' }
+    { type: 'select', search: 'ліцензія', answer: 'не виключає можливості використання ліцензіаром' },
+    { type: 'select', search: 'ACM', answer: 'Вимоги до керування конфігурацією' },
+    { type: 'select', search: 'AGD', answer: 'Вимоги до посібника користувача та адміністратора' },
+    { type: 'select', search: 'ATE', answer: 'Вимоги до тестування' },
+    { type: 'select', search: 'AVA', answer: 'Вимоги до оцінки вразливостей' },
+    { type: 'select', search: 'ADO', answer: 'Вимоги до постачання та експлуатації' },
+    { type: 'select', search: 'AMA', answer: 'Вимоги до підтримки довіри після серти' },
+    { type: 'select', search: 'FAU', answer: 'Вимоги до сервісу аудиту' },
+    { type: 'select', search: 'FIA', answer: 'Вимоги до ідентифікації та автентифікації' },
+    { type: 'select', search: 'ARU', answer: 'Вимоги до використання ресурсів' }
   ]
 
 
@@ -208,4 +217,5 @@
   // Run
   // ============================================================
   testIt()
+  return 'Yeap!'
 })()
