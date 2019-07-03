@@ -65,11 +65,12 @@
   { type: 'select', answer: 'представлених на ринку', search: 'Об\'єкти промислової власності' },
   { type: 'select', answer: 'меншою мірою', search: 'Об\'єкти авторського права і суміжних прав' },
   { type: 'select', answer: 'не стільки створені', search: 'Комерційні позначення' },
-  { type: 'select', answer: 'принципово новий вид', search: 'Винахід' },
+  { type: 'select', answer: 'в будь-якій сфері', search: 'винахід' },
   { type: 'select', answer: 'у сфері продукції', search: 'Корисна модель' },
   { type: 'select', answer: 'невідомих раніше', search: 'Наукове відкриття' },
   { type: 'select', answer: 'секретною', search: 'Комерційна пропозиція' },
-  { type: 'select', answer: 'комбінація', search: 'Торговельна марка' },
+  { type: 'select', answer: 'комбінація', search: 'Торгова марка' },
+  { type: 'select', answer: 'прикладне значення', search: 'Результат технічної' },
   { type: 'select', answer: 'їхнього створення', search: 'Державна система інтелектуальної власності' },
   { type: 'select', answer: 'експертних', search: 'Установа' },
   { type: 'select', answer: 'експертних', search: 'Державна система правової охорони інтелектуальної власності' },
@@ -86,35 +87,7 @@
   { type: 'select', answer: 'розрахункова сума', search: 'Ринкова вартість' },
   { type: 'select', answer: 'доопрацювання', search: 'Вартість утилізації' },
   { type: 'select', answer: 'конкретних методик', search: 'Вартість для страхування та оподаткування' },
-  { type: 'select', answer: 'представить', search: 'Інвестиційна власність' },
-
-  { type: 'input', search: 'особи на результат', answer: 'Інтелектуальна власність' },
-  { type: 'input', search: 'гуманітарній сфері', answer: 'Результат художньої творчості' },
-  { type: 'input', search: 'представлених на ринку', answer: 'Об\'єкти промислової власності' },
-  { type: 'input', search: 'меншою мірою', answer: 'Об\'єкти авторського права і суміжних прав' },
-  { type: 'input', search: 'не стільки створені', answer: 'Комерційні позначення' },
-  { type: 'input', search: 'принципово новий вид', answer: 'Винахід' },
-  { type: 'input', search: 'у сфері продукції', answer: 'Корисна модель' },
-  { type: 'input', search: 'невідомих раніше', answer: 'Наукове відкриття' },
-  { type: 'input', search: 'секретною', answer: 'Комерційна пропозиція' },
-  { type: 'input', search: 'комбінація', answer: 'Торговельна марка' },
-  { type: 'input', search: 'їхнього створення', answer: 'Державна система інтелектуальної власності' },
-  { type: 'input', search: 'експертних', answer: 'Установа' },
-  { type: 'input', search: 'експертних', answer: 'Державна система правової охорони інтелектуальної власності' },
-  { type: 'input', search: 'урядовий орган', answer: 'Державна служба інтелектуальної власності' },
-  { type: 'input', search: 'охорона надається автоматично', answer: 'Принцип автоматичної охорони літературних та художніх творів' },
-  { type: 'input', search: 'одержувати у всіх інших', answer: 'Принцип національного режиму охорони літературних та художніх творів' },
-  { type: 'input', search: 'походження твору', answer: 'Принцип незалежності охорони' },
-  { type: 'input', search: 'промисловий зразок', answer: 'Патент' },
-  { type: 'input', search: 'суміжних прав, комерційні позначення', answer: 'Свідоцтво' },
-  { type: 'input', search: 'взаємовигідних', answer: 'Комерціалізація об’єктів інтелектуальної власності' },
-  { type: 'input', search: 'обумовлена', answer: 'Виключна ліцензія' },
-  { type: 'input', search: 'ліцензіаром цього', answer: 'Одинична ліцензія' },
-  { type: 'input', search: 'видачі ним іншим особам', answer: 'Невиключна ліцензія' },
-  { type: 'input', search: 'розрахункова сума', answer: 'Ринкова вартість' },
-  { type: 'input', search: 'доопрацювання', answer: 'Вартість утилізації' },
-  { type: 'input', search: 'конкретних методик', answer: 'Вартість для страхування та оподаткування' },
-  { type: 'input', search: 'представить', answer: 'Інвестиційна власність' }
+  { type: 'select', answer: 'представить', search: 'Інвестиційна власність' }
 ]
 
   var passedCount = 0
@@ -290,7 +263,9 @@
 
       // AnswerNode
       var answerNode = findParentNodeByText(answer, questionNode.parentNode, exeptions)
-
+      if (answerNode && answerNode.nodeName === 'LABEL') {
+        answerNode = findParentNodeByText(answer, questionNode.parentNode, [answerNode])
+      }
       if (!answerNode || answerNode.nodeName !== 'OPTION') {
         fill(search, answer)
         return

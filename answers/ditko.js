@@ -50,14 +50,7 @@ let answers = [
   { type: 'radio', search: 'Залежна стратегія', answer: 'визначається політикою' },
   { type: 'radio', search: 'Традиційна стратегія', answer: 'не передбачає значних технологічних змін, тому така стратегія тільки умовно належить до інноваційної' },
   { type: 'radio', search: 'Ситуаційна стратегія', answer: 'є реакцією керівництва на зовнішні сигнали ринку або інституційного середовища' },
-  { type: 'radio', search: '', answer: '' },
-  { type: 'radio', search: '', answer: '' },
-  { type: 'radio', search: '', answer: '' },
-  { type: 'radio', search: '', answer: '' },
   { type: 'checkbox', search: 'Які технології дозволяють створити безоплатну бізнес-модель', answer: ['Вартість зберігання інформації', 'Вартість інтернету', 'Вартість створення цифрового контенту'] },
-  { type: 'checkbox', search: '', answer: ['', ''] },
-  { type: 'checkbox', search: '', answer: ['', ''] },
-  { type: 'checkbox', search: '', answer: ['', ''] },
   { type: 'input', search: 'Коли якийсь факт, предмет чи явище підказує нове конструктивне, технологічне чи дизайнерське вирішення нового товару використовується метод', answer: 'аналогії' },
   { type: 'input', search: 'Нові за виглядом, формою, розміщенням частин або побудовою технічні конструкції', answer: 'промислові' },
   { type: 'input', search: 'Показник ефективності інноваційного проекту під назвою', answer: 'період' },
@@ -76,7 +69,6 @@ let answers = [
   { type: 'input', search: 'підприємство, що створюється для реалізації інноваційного проекту', answer: 'Венчурне' },
   { type: 'input', search: 'на позитивному іміджі фірми, уособленому в його торговій марці', answer: 'Брендування' },
   { type: 'input', search: 'загальновизнані наукові досягнення, які протягом певного часу дають науковому співтовариству модель постановки проблем', answer: 'Гіпотеза' },
-  
   { type: 'select', search: 'інвестування фінансових ресурсів у більше ніж один вид інновацій, тобто процес розподілу інвестицій між різними', answer: 'Диверсифікація' },
   { type: 'select', search: 'організаційна структура, метою якої є створення сприятливих умов для стартового розвитку малих підприємств через надання їм певного комплексу', answer: 'Бізнес-інкубатор' },
   { type: 'select', search: 'розгорнутий документ, що містить', answer: 'Бізнес-план' },
@@ -86,46 +78,38 @@ let answers = [
   { type: 'select', search: 'підприємство, що створюється для реалізації інноваційного проекту', answer: 'Венчурне' },
   { type: 'select', search: 'на позитивному іміджі фірми, уособленому в його торговій марці', answer: 'Брендування' },
   { type: 'select', search: 'загальновизнані наукові досягнення, які протягом певного часу дають науковому співтовариству модель постановки проблем', answer: 'Гіпотеза' },
-  
   { type: 'select', search: 'Forming', answer: '1' },
   { type: 'select', search: 'Storming', answer: '2' },
   { type: 'select', search: 'Norming', answer: '3' },
   { type: 'select', search: 'Performing', answer: '4' },
-
   { type: 'select', search: 'Валідація', answer: 'Забезпечення відповідності' },
   { type: 'select', search: 'Верифікація', answer: 'Перевірка правильності трансформації' },
   { type: 'select', search: 'Агрегація', answer: 'кількох понять у нове поняття' },
-
   { type: 'select', search: 'Люди та співпраця важливіші за', answer: 'процеси та інструменти' },
   { type: 'select', search: 'Працюючий продукт важливіший за', answer: 'вичерпну документацію' },
   { type: 'select', search: 'Позитивна співпраця із замовником важливіша за ', answer: 'обговорення умов контракту' },
   { type: 'select', search: 'Готовність до змін важливіша за', answer: 'дотримання плану' },
-
   { type: 'select', search: 'генерування ідей', answer: '1' },
   { type: 'select', search: 'оцінювання та відбір перспективних ідей', answer: '2' },
   { type: 'select', search: 'розроблення концепції товару', answer: '3' },
   { type: 'select', search: 'розроблення і створення дослідного зразка', answer: '4' },
   { type: 'select', search: 'пробний маркетинг', answer: '5' },
-
   { type: 'select', search: 'Initiation Project', answer: '1' },
   { type: 'select', search: 'Planning', answer: '2' },
   { type: 'select', search: 'Executive', answer: '3' },
   { type: 'select', search: 'Monitoring', answer: '4' },
   { type: 'select', search: 'Closing', answer: '5' },
-
   { type: 'select', search: 'Planning', answer: '1' },
   { type: 'select', search: 'Analysis', answer: '2' },
   { type: 'select', search: 'Design', answer: '3' },
   { type: 'select', search: 'Implementation', answer: '4' },
   { type: 'select', search: 'Testing', answer: '5' },
   { type: 'select', search: 'Maintenance', answer: '6' },
- 
   { type: 'select', search: 'Емпатія', answer: '1' },
   { type: 'select', search: 'Фокусування', answer: '2' },
   { type: 'select', search: 'Генерація ідей', answer: '3' },
   { type: 'select', search: 'Прототип', answer: '4' },
   { type: 'select', search: 'Тестування', answer: '5' },
-
   { type: 'select', search: 'Задум', answer: '1' },
   { type: 'select', search: 'Дослідження', answer: '2' },
   { type: 'select', search: 'Концепт', answer: '3' },
@@ -133,10 +117,7 @@ let answers = [
   { type: 'select', search: 'Роадмап  продукту', answer: '5' },
   { type: 'select', search: 'Дизайн продукту', answer: '6' },
   { type: 'select', search: 'Розробка', answer: '7' },
-
   { type: 'select', search: 'Каскадна модель', answer: 'в якій кожен етап роботи виконується лише раз' },
   { type: 'select', search: 'Спіральна модель', answer: 'яка дозволяє повертатися до будь-якого попереднього етапу' },
   { type: 'select', search: 'Еволюційна модел', answer: 'в якій система послідовно розробляється з блоків' },
-
-  { type: 'select', search: '', answer: '' }
 ]

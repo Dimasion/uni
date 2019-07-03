@@ -345,7 +345,9 @@
 
       // AnswerNode
       var answerNode = findParentNodeByText(answer, questionNode.parentNode, exeptions)
-
+      if (answerNode && answerNode.nodeName === 'LABEL') {
+        answerNode = findParentNodeByText(answer, questionNode.parentNode, [answerNode])
+      }
       if (!answerNode || answerNode.nodeName !== 'OPTION') {
         fill(search, answer)
         return
