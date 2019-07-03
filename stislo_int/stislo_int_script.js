@@ -182,14 +182,19 @@
 
       // AnswerNode
       var answerNode = findParentNodeByText(answer, questionNode.parentNode, exeptions)
+      var radioNode = null
 
-      if (!answerNode || answerNode.nodeName !== 'LABEL') {
+      if (answerNode) {
+        radioNode = answerNode.parentNode.querySelector('input[type="radio"]')
+      }
+
+      if (!answerNode || answerNode.nodeName !== 'LABEL' || !radioNode) {
         fill(search, answer)
         return
       }
 
       // Result
-      answerNode.click()
+      radioNode.checked = true
       passedCount = passedCount + 1
     })()
   }
@@ -215,8 +220,13 @@
 
       // AnswerNode
       var firstAnswerNode = findParentNodeByText(answer[0], questionNode.parentNode, exeptions)
+      var checkboxNode = null
 
-      if (!firstAnswerNode || firstAnswerNode.nodeName !== 'LABEL') {
+      if (firstAnswerNode) {
+        checkboxNode = firstAnswerNode.parentNode.querySelector('input[type="checkbox"]')
+      }
+
+      if (!firstAnswerNode || firstAnswerNode.nodeName !== 'LABEL' || !checkboxNode) {
         fill(search, answer)
         return
       }
@@ -226,7 +236,7 @@
         var answerNode = findParentNodeByText(item, questionNode.parentNode, exeptions)
 
         if (!answerNode) return
-        answerNode.click()
+        checkboxNode.checked = true
       })
 
       passedCount = passedCount + 1
