@@ -57,14 +57,7 @@
     return (function fill() {
       // QuestionNode
       var questionNode = findParentNodeByText(search, null, exeptions)
-
       if (!questionNode) return
-      if (questionNode.nodeName === 'SCRIPT') {
-        exeptions.push(questionNode)
-        fill(search, answer)
-        return
-      }
-
       exeptions.push(questionNode)
 
       // AnswerNode
@@ -75,7 +68,7 @@
         radioNode = answerNode.parentNode.querySelector('input[type="radio"]')
       }
 
-      if (!answerNode || answerNode.nodeName !== 'LABEL' || !radioNode) {
+      if (!radioNode || answerNode.nodeName !== 'LABEL') {
         fill(search, answer)
         return
       }
@@ -95,25 +88,18 @@
     return (function fill() {
       // QuestionNode
       var questionNode = findParentNodeByText(search, null, exeptions)
-
       if (!questionNode) return
-      if (questionNode.nodeName === 'SCRIPT') {
-        exeptions.push(questionNode)
-        fill(search, answer)
-        return
-      }
-
       exeptions.push(questionNode)
 
       // AnswerNode
       var firstAnswerNode = findParentNodeByText(answer[0], questionNode.parentNode, exeptions)
-      var isCheckbox = null
+      var firstCheckboxNode = null
 
       if (firstAnswerNode) {
-        isCheckbox = firstAnswerNode.parentNode.querySelector('input[type="checkbox"]')
+        firstCheckboxNode = firstAnswerNode.parentNode.querySelector('input[type="checkbox"]')
       }
 
-      if (!firstAnswerNode || firstAnswerNode.nodeName !== 'LABEL' || !isCheckbox) {
+      if (!firstCheckboxNode || firstAnswerNode.nodeName !== 'LABEL') {
         fill(search, answer)
         return
       }
@@ -122,8 +108,8 @@
       answer.forEach(item => {
         var answerNode = findParentNodeByText(item, questionNode.parentNode, exeptions)
         if (!answerNode) return
-        var checkboxNode = answerNode.parentNode.querySelector('input[type="checkbox"]')
 
+        var checkboxNode = answerNode.parentNode.querySelector('input[type="checkbox"]')
         checkboxNode.checked = true
       })
 
@@ -140,14 +126,7 @@
     return (function fill() {
       // QuestionNode
       var questionNode = findParentNodeByText(search, null, exeptions)
-
       if (!questionNode) return
-      if (questionNode.nodeName === 'SCRIPT') {
-        exeptions.push(questionNode)
-        fill(search, answer)
-        return
-      }
-
       exeptions.push(questionNode)
 
       // AnswerNode
@@ -173,14 +152,7 @@
     return (function fill() {
       // QuestionNode
       var questionNode = findParentNodeByText(search, null, exeptions)
-
       if (!questionNode) return
-      if (questionNode.nodeName === 'SCRIPT') {
-        exeptions.push(questionNode)
-        fill(search, answer)
-        return
-      }
-
       exeptions.push(questionNode)
 
       // AnswerNode

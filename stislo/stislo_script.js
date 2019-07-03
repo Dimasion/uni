@@ -113,6 +113,7 @@
   { type: 'input', search: 'стандартна файлова система', answer: 'NTFS' },
   { type: 'input', search: 'пояснюють інші дані', answer: 'Метадані' },
   { type: 'checkbox', search: 'Вкажіть формати даних', answer: ['агальний', 'Числовий', 'Дата'] },
+  { type: 'checkbox', search: 'зах', answer: ['ма', 'па'] },
   { type: 'select', search: 'визначається можливістю забезпечення досягнення', answer: 'Цінність інформації' },
   { type: 'select', search: 'відповідність отриманої інформації реальності навколишнього', answer: 'Достовірність' },
   { type: 'select', search: 'цінності та достовірності отриманої інформації', answer: 'Актуальність' },
@@ -146,7 +147,9 @@
   { type: 'select', search: 'ARU', answer: 'до використання ресурсів' },
   { type: 'select', search: 'FAU_SEL', answer: 'Вимоги до засобів відбору подій для аудиту' },
   { type: 'select', search: 'FAU_STG', answer: 'Визначаэ вимоги до зберігання даних аудиту' },
-  { type: 'select', search: 'FAU_SAR', answer: 'Права на повне або часткове читання журналів реєстраційної' }
+  { type: 'select', search: 'FAU_SAR', answer: 'Права на повне або часткове читання журналів реєстраційної' },
+  { type: 'select', search: 'таємна', answer: 'грунтується' },
+  { type: 'radio', search: 'два види', answer: 'відкрита та інформація з обмеженим' },
 ]
 
   var passedCount = 0
@@ -202,14 +205,7 @@
     return (function fill() {
       // QuestionNode
       var questionNode = findParentNodeByText(search, null, exeptions)
-
       if (!questionNode) return
-      if (questionNode.nodeName === 'SCRIPT') {
-        exeptions.push(questionNode)
-        fill(search, answer)
-        return
-      }
-
       exeptions.push(questionNode)
 
       // AnswerNode
@@ -220,7 +216,7 @@
         radioNode = answerNode.parentNode.querySelector('input[type="radio"]')
       }
 
-      if (!answerNode || answerNode.nodeName !== 'LABEL' || !radioNode) {
+      if (!radioNode || answerNode.nodeName !== 'LABEL') {
         fill(search, answer)
         return
       }
@@ -240,25 +236,18 @@
     return (function fill() {
       // QuestionNode
       var questionNode = findParentNodeByText(search, null, exeptions)
-
       if (!questionNode) return
-      if (questionNode.nodeName === 'SCRIPT') {
-        exeptions.push(questionNode)
-        fill(search, answer)
-        return
-      }
-
       exeptions.push(questionNode)
 
       // AnswerNode
       var firstAnswerNode = findParentNodeByText(answer[0], questionNode.parentNode, exeptions)
-      var checkboxNode = null
+      var firstCheckboxNode = null
 
       if (firstAnswerNode) {
-        checkboxNode = firstAnswerNode.parentNode.querySelector('input[type="checkbox"]')
+        firstCheckboxNode = firstAnswerNode.parentNode.querySelector('input[type="checkbox"]')
       }
 
-      if (!firstAnswerNode || firstAnswerNode.nodeName !== 'LABEL' || !checkboxNode) {
+      if (!firstCheckboxNode || firstAnswerNode.nodeName !== 'LABEL') {
         fill(search, answer)
         return
       }
@@ -266,8 +255,9 @@
       // Result
       answer.forEach(item => {
         var answerNode = findParentNodeByText(item, questionNode.parentNode, exeptions)
-
         if (!answerNode) return
+
+        var checkboxNode = answerNode.parentNode.querySelector('input[type="checkbox"]')
         checkboxNode.checked = true
       })
 
@@ -284,14 +274,7 @@
     return (function fill() {
       // QuestionNode
       var questionNode = findParentNodeByText(search, null, exeptions)
-
       if (!questionNode) return
-      if (questionNode.nodeName === 'SCRIPT') {
-        exeptions.push(questionNode)
-        fill(search, answer)
-        return
-      }
-
       exeptions.push(questionNode)
 
       // AnswerNode
@@ -317,14 +300,7 @@
     return (function fill() {
       // QuestionNode
       var questionNode = findParentNodeByText(search, null, exeptions)
-
       if (!questionNode) return
-      if (questionNode.nodeName === 'SCRIPT') {
-        exeptions.push(questionNode)
-        fill(search, answer)
-        return
-      }
-
       exeptions.push(questionNode)
 
       // AnswerNode

@@ -225,14 +225,7 @@
     return (function fill() {
       // QuestionNode
       var questionNode = findParentNodeByText(search, null, exeptions)
-
       if (!questionNode) return
-      if (questionNode.nodeName === 'SCRIPT') {
-        exeptions.push(questionNode)
-        fill(search, answer)
-        return
-      }
-
       exeptions.push(questionNode)
 
       // AnswerNode
@@ -243,7 +236,7 @@
         radioNode = answerNode.parentNode.querySelector('input[type="radio"]')
       }
 
-      if (!answerNode || answerNode.nodeName !== 'LABEL' || !radioNode) {
+      if (!radioNode || answerNode.nodeName !== 'LABEL') {
         fill(search, answer)
         return
       }
@@ -263,25 +256,18 @@
     return (function fill() {
       // QuestionNode
       var questionNode = findParentNodeByText(search, null, exeptions)
-
       if (!questionNode) return
-      if (questionNode.nodeName === 'SCRIPT') {
-        exeptions.push(questionNode)
-        fill(search, answer)
-        return
-      }
-
       exeptions.push(questionNode)
 
       // AnswerNode
       var firstAnswerNode = findParentNodeByText(answer[0], questionNode.parentNode, exeptions)
-      var checkboxNode = null
+      var firstCheckboxNode = null
 
       if (firstAnswerNode) {
-        checkboxNode = firstAnswerNode.parentNode.querySelector('input[type="checkbox"]')
+        firstCheckboxNode = firstAnswerNode.parentNode.querySelector('input[type="checkbox"]')
       }
 
-      if (!firstAnswerNode || firstAnswerNode.nodeName !== 'LABEL' || !checkboxNode) {
+      if (!firstCheckboxNode || firstAnswerNode.nodeName !== 'LABEL') {
         fill(search, answer)
         return
       }
@@ -289,8 +275,9 @@
       // Result
       answer.forEach(item => {
         var answerNode = findParentNodeByText(item, questionNode.parentNode, exeptions)
-
         if (!answerNode) return
+
+        var checkboxNode = answerNode.parentNode.querySelector('input[type="checkbox"]')
         checkboxNode.checked = true
       })
 
@@ -307,14 +294,7 @@
     return (function fill() {
       // QuestionNode
       var questionNode = findParentNodeByText(search, null, exeptions)
-
       if (!questionNode) return
-      if (questionNode.nodeName === 'SCRIPT') {
-        exeptions.push(questionNode)
-        fill(search, answer)
-        return
-      }
-
       exeptions.push(questionNode)
 
       // AnswerNode
@@ -340,14 +320,7 @@
     return (function fill() {
       // QuestionNode
       var questionNode = findParentNodeByText(search, null, exeptions)
-
       if (!questionNode) return
-      if (questionNode.nodeName === 'SCRIPT') {
-        exeptions.push(questionNode)
-        fill(search, answer)
-        return
-      }
-
       exeptions.push(questionNode)
 
       // AnswerNode

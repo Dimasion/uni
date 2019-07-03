@@ -109,6 +109,7 @@ let answers = [
   { type: 'input', search: 'стандартна файлова система', answer: 'NTFS' },
   { type: 'input', search: 'пояснюють інші дані', answer: 'Метадані' },
   { type: 'checkbox', search: 'Вкажіть формати даних', answer: ['агальний', 'Числовий', 'Дата'] },
+  { type: 'checkbox', search: 'зах', answer: ['ма', 'па'] },
   { type: 'select', search: 'визначається можливістю забезпечення досягнення', answer: 'Цінність інформації' },
   { type: 'select', search: 'відповідність отриманої інформації реальності навколишнього', answer: 'Достовірність' },
   { type: 'select', search: 'цінності та достовірності отриманої інформації', answer: 'Актуальність' },
@@ -142,5 +143,7 @@ let answers = [
   { type: 'select', search: 'ARU', answer: 'до використання ресурсів' },
   { type: 'select', search: 'FAU_SEL', answer: 'Вимоги до засобів відбору подій для аудиту' },
   { type: 'select', search: 'FAU_STG', answer: 'Визначаэ вимоги до зберігання даних аудиту' },
-  { type: 'select', search: 'FAU_SAR', answer: 'Права на повне або часткове читання журналів реєстраційної' }
+  { type: 'select', search: 'FAU_SAR', answer: 'Права на повне або часткове читання журналів реєстраційної' },
+  { type: 'select', search: 'таємна', answer: 'грунтується' },
+  { type: 'radio', search: 'два види', answer: 'відкрита та інформація з обмеженим' },
 ]
