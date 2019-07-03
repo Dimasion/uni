@@ -62,8 +62,13 @@
     return (function fill() {
       // QuestionNode
       var questionNode = findParentNodeByText(search, null, exeptions)
-      if (!questionNode) return
       exeptions.push(questionNode)
+
+      if (!questionNode) return
+      if (questionNode.nodeName === 'SCRIPT') {
+        fill(search, answer)
+        return
+      }
 
       // AnswerNode
       var answerNode = findParentNodeByText(answer, questionNode.parentNode, exeptions)
@@ -93,8 +98,13 @@
     return (function fill() {
       // QuestionNode
       var questionNode = findParentNodeByText(search, null, exeptions)
-      if (!questionNode) return
       exeptions.push(questionNode)
+
+      if (!questionNode) return
+      if (questionNode.nodeName === 'SCRIPT') {
+        fill(search, answer)
+        return
+      }
 
       // AnswerNode
       var firstAnswerNode = findParentNodeByText(answer[0], questionNode.parentNode, exeptions)
@@ -131,8 +141,13 @@
     return (function fill() {
       // QuestionNode
       var questionNode = findParentNodeByText(search, null, exeptions)
-      if (!questionNode) return
       exeptions.push(questionNode)
+
+      if (!questionNode) return
+      if (questionNode.nodeName === 'SCRIPT') {
+        fill(search, answer)
+        return
+      }
 
       // AnswerNode
       var answerNode = questionNode.parentNode.querySelector('input[type="text"]')
@@ -157,8 +172,13 @@
     return (function fill() {
       // QuestionNode
       var questionNode = findParentNodeByText(search, null, exeptions)
-      if (!questionNode) return
       exeptions.push(questionNode)
+
+      if (!questionNode) return
+      if (questionNode.nodeName === 'SCRIPT') {
+        fill(search, answer)
+        return
+      }
 
       // AnswerNode
       var answerNode = findParentNodeByText(answer, questionNode.parentNode, exeptions)
