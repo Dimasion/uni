@@ -107,13 +107,13 @@
 
       // AnswerNode
       var firstAnswerNode = findParentNodeByText(answer[0], questionNode.parentNode, exeptions)
-      var checkboxNode = null
+      var isCheckbox = null
 
       if (firstAnswerNode) {
-        checkboxNode = firstAnswerNode.parentNode.querySelector('input[type="checkbox"]')
+        isCheckbox = firstAnswerNode.parentNode.querySelector('input[type="checkbox"]')
       }
 
-      if (!firstAnswerNode || firstAnswerNode.nodeName !== 'LABEL' || !checkboxNode) {
+      if (!firstAnswerNode || firstAnswerNode.nodeName !== 'LABEL' || !isCheckbox) {
         fill(search, answer)
         return
       }
@@ -121,8 +121,9 @@
       // Result
       answer.forEach(item => {
         var answerNode = findParentNodeByText(item, questionNode.parentNode, exeptions)
-
         if (!answerNode) return
+        var checkboxNode = answerNode.parentNode.querySelector('input[type="checkbox"]')
+
         checkboxNode.checked = true
       })
 
