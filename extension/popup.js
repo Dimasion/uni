@@ -1,4 +1,4 @@
-const subjects = [{"src":"https://dimasion2010.000webhostapp.com/ditko_script.js","name":"ditko"},{"src":"https://dimasion2010.000webhostapp.com/pashkevich_script.js","name":"pashkevich"},{"src":"https://dimasion2010.000webhostapp.com/stislo_script.js","name":"stislo"},{"src":"https://dimasion2010.000webhostapp.com/stislo_int_script.js","name":"stislo_int"},{"src":"https://dimasion2010.000webhostapp.com/test_script.js","name":"test"}]
+const subjects = [{"src":"https://dimasion2010.000webhostapp.com/ditko_script.js","name":"ditko"},{"src":"https://dimasion2010.000webhostapp.com/pashkevich_script.js","name":"pashkevich"},{"src":"https://dimasion2010.000webhostapp.com/stislo_script.js","name":"stislo"},{"src":"https://dimasion2010.000webhostapp.com/stislo_int_script.js","name":"stislo_int"}]
 
 subjects.forEach(subject => {
   document.querySelector('body').insertAdjacentHTML('afterend', `

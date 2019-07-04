@@ -23,11 +23,14 @@ fs.readFile('./core.js', 'utf-8', function read(err, data) {
 })
 
 function createScript (subject, content) {
-  if (!fs.existsSync(subject)) {
-    fs.mkdirSync(subject)
+  if (!fs.existsSync('dist')) {
+    fs.mkdirSync('dist')
+  }
+  if (!fs.existsSync(`dist/${subject}`)) {
+    fs.mkdirSync(`dist/${subject}`)
   }
 
-  const name = `./${subject}/${subject}_script.js`
+  const name = `./dist/${subject}/${subject}_script.js`
 
   fs.writeFile(name, content, (err) => {
     if (err) throw err;
@@ -37,12 +40,15 @@ function createScript (subject, content) {
 
 
 function createTxt (subject, host) {
-  if (!fs.existsSync(subject)) {
-    fs.mkdirSync(subject)
+  if (!fs.existsSync('dist')) {
+    fs.mkdirSync('dist')
+  }
+  if (!fs.existsSync(`dist/${subject}`)) {
+    fs.mkdirSync(`dist/${subject}`)
   }
 
   const text = `document.body.appendChild(document.createElement("script")).setAttribute('src', '${host}/${subject}_script.js')`
-  const name = `./${subject}/${subject}_append.txt`
+  const name = `./dist/${subject}/${subject}_append.txt`
 
   fs.writeFile(name, text, 'utf-8', (err) => {
     if (err) throw err;
