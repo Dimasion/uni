@@ -15,6 +15,7 @@ fs.readFile('./core.js', 'utf-8', function read(err, data) {
         createScript(item.filename, script)
         createTxt(item.filename, HOST)
       })
+      addToExtension(files, HOST)
     })
     .catch( error => {
       console.log( error )
@@ -47,6 +48,27 @@ function createTxt (subject, host) {
     if (err) throw err;
     console.log(`${name} has been created!`)
   });
+}
+
+function addToExtension (files, host) {
+  fs.readFile('./extension/popup.js', 'utf-8', function read(err, data) {
+    let popupData = data
+    const subjects = []
+
+    files.forEach(item => {
+      subjects.push({
+        src: `${host}/${item.filename}_script.js`,
+        name: item.filename
+      })
+    })
+
+    popupData = popupData.replace(popupData.split('\n')[0], `const subjects = ${JSON.stringify(subjects)}`)
+
+    fs.writeFile('./extension/popup.js', popupData, 'utf-8', (err) => {
+      if (err) throw err;
+      console.log(`Extension popup data has been created!`)
+    });
+  })
 }
 /**
  * Promise all
